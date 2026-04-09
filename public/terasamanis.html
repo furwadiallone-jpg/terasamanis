@@ -1750,6 +1750,8 @@
             { category: 'food', name: 'Cheese Noodle', img: 'https://i.ibb.co.com/HfhbpnL6/Noodle.jpg' }
         ];
 
+        
+
         // ========== RENDER MENU ==========
         function renderMenu() {
             const categories = { coffee: '', 'non-coffee': '', food: '', all: '' };
@@ -1949,11 +1951,98 @@
 
         // Initialize leaves on page load
         window.addEventListener('load', createFallingLeaves);
+
+        // ========== ADD NEW MENU ITEM ==========
+        menuData.push({
+            category: 'food',
+            name: 'Chicken Mentai',
+            img: '6.jpeg'
+        });
+             menuData.push({
+            category: 'food',
+            name: '',
+            img: '5.jpeg'
+        });
+            menuData.push({
+            category: 'food',
+            name: 'soto soup',
+            img: '7.jpeg'
+        });
+            menuData.push({
+            category: 'food',
+            name: '',
+            img: '4.jpeg'
+        });
+                        menuData.push({
+            category: 'food',
+            name: 'chicken berbeque',
+            img: '3.jpeg',
+            price: '22.000'
+        });
+            menuData.push({
+            category: 'food',
+            name: '',
+            img: '2.jpeg'
+        });
+             menuData.push({
+            category: 'food',
+            name: '',
+            img: '1.jpeg'
+        });
+            menuData.push({
+            category: 'non-coffee',
+            name: 'boba regal',
+            img: '8.jpeg'
+        });
+            menuData.push({
+            category: 'non-coffee',
+            name: 'brown sugar boba milk',
+            img: '9.jpeg'
+        });
+            menuData.push({
+            category: 'non-coffee',
+            name: 'boba pandan',
+            img: '10.jpeg'
+        });
+            menuData.push({
+            category: 'non-coffee',
+            name: 'apple yakult',
+            img: '11.jpeg'
+        });
+            menuData.push({
+            category: 'coffee',
+            name: 'kopi susu',
+            img: '12.jpeg'
+        });
+             menuData.push({
+            category: 'non-coffee',
+            name: 'milk tea',
+            img: '13.jpeg'
+        }); 
+        menuData.push({
+            category: 'non-coffee',
+            name: 'choco macha',
+            img: '14.jpeg'
+        });
+            menuData.push({
+                category: 'coffee',
+                name: 'kopi coklat',
+                img: '15.jpeg'
+            });
+            menuData.push({
+                category: 'non-coffee',
+                name: 'choco machato',
+                img: '16.jpeg'
+            });
+            menuData.push({
+                category: 'non-coffee',
+                name: 'choco mint',
+                img: '17.jpeg'
+            });
     </script>
 
 </body>
 </html>
-
 
 <style>
 /* Override hero background to use the provided image with a subtle overlay for readability */
@@ -2048,4 +2137,176 @@ clickLeafStyle.textContent = `
 `;
 document.head.appendChild(clickLeafStyle);
 </script>
+<script>
+// ========== IMAGE ZOOM MODAL ==========
+const zoomModal = document.createElement('div');
+zoomModal.id = 'zoomModal';
+zoomModal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+`;
 
+zoomModal.innerHTML = `
+    <div style="position: relative; max-width: 90vw; max-height: 90vh;">
+        <img id="zoomImage" src="" alt="Zoomed Image" style="max-width: 100%; max-height: 100%; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+        <button id="closeZoom" style="
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        ">✕</button>
+    </div>
+`;
+
+document.body.appendChild(zoomModal);
+
+const priceImages = document.querySelectorAll('.price-card img');
+priceImages.forEach(img => {
+    img.style.cursor = 'pointer';
+    img.style.transition = 'transform 0.3s ease';
+    
+    img.addEventListener('click', function() {
+        document.getElementById('zoomImage').src = this.src;
+        zoomModal.style.display = 'flex';
+    });
+    
+    img.addEventListener('mouseover', function() {
+        this.style.transform = 'scale(1.05)';
+    });
+    
+    img.addEventListener('mouseout', function() {
+        this.style.transform = 'scale(1)';
+    });
+});
+
+document.getElementById('closeZoom').addEventListener('click', () => {
+    zoomModal.style.display = 'none';
+});
+
+zoomModal.addEventListener('click', (e) => {
+    if (e.target === zoomModal) {
+        zoomModal.style.display = 'none';
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && zoomModal.style.display === 'flex') {
+        zoomModal.style.display = 'none';
+    }
+});
+</script>
+
+<!-- INSTAGRAM FLOATING BUTTON -->
+<a href="https://www.instagram.com/terasamanis.id/" class="instagram-float" target="_blank" title="Follow Instagram">
+    <i class="fab fa-instagram"></i>
+</a>
+
+<style>
+    /* ========== INSTAGRAM FLOATING BUTTON ========== */
+    .instagram-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 100px;
+        right: 30px;
+        background: linear-gradient(135deg, #e4405f, #fd1d1d);
+        color: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        box-shadow: 0 8px 24px rgba(228, 64, 95, 0.3);
+        transition: var(--transition);
+        z-index: 999;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .instagram-float:hover {
+        background: linear-gradient(135deg, #fd1d1d, #e4405f);
+        transform: scale(1.1) translateY(-5px);
+        box-shadow: 0 12px 32px rgba(228, 64, 95, 0.4);
+    }
+
+    .instagram-float:active {
+        transform: scale(0.95);
+    }
+
+    @media (max-width: 480px) {
+        .instagram-float {
+            width: 55px;
+            height: 55px;
+            bottom: 145px;
+            right: 20px;
+            font-size: 24px;
+        }
+    }
+</style>
+<!-- FACEBOOK FLOATING BUTTON -->
+<a href="https://web.facebook.com/p/TerasaManis-100066932766067/" class="facebook-float" target="_blank" title="Follow Facebook">
+    <i class="fab fa-facebook-f"></i>
+</a>
+
+<style>
+    /* ========== FACEBOOK FLOATING BUTTON ========== */
+    .facebook-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 170px;
+        right: 30px;
+        background: linear-gradient(135deg, #1877f2, #0a66c2);
+        color: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        box-shadow: 0 8px 24px rgba(24, 119, 242, 0.3);
+        transition: var(--transition);
+        z-index: 999;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .facebook-float:hover {
+        background: linear-gradient(135deg, #0a66c2, #1877f2);
+        transform: scale(1.1) translateY(-5px);
+        box-shadow: 0 12px 32px rgba(24, 119, 242, 0.4);
+    }
+
+    .facebook-float:active {
+        transform: scale(0.95);
+    }
+
+    @media (max-width: 480px) {
+        .facebook-float {
+            width: 55px;
+</style>
+// ========== ADD NEW MENU ITEM ==========
+menuData.push({
+    category: 'food',
+    name: 'Chicken Mentai',
+    img: '6.jpeg'
+});
